@@ -109,7 +109,7 @@ def prime(request):
                         r == 1
                         break
                 if r == 1:
-                    list.append(i)
+                    list.append(j)
             return HttpResponse(f"Prime between 0 and {n} are : {list}:")
         else :
             return HttpResponse("invalid")
