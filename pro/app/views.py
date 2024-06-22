@@ -97,18 +97,22 @@ def exp(request):
 
 def prime(request):
     list = []
+    r = 0
     if request.method == 'POST':
         primei = primef(request.POST)
         if primei.is_valid():
             n = primei.cleaned_data.get('Number')
             for i in range(1, n):
+                r = 0
                 for j in range(1,i):
-                    if i % j == 0:
-                        list.append(?/////////)
+                    if i // j == i or 1:
+                        r == 1
                         break
+                if r == 1:
+                    list.append(i)
             return HttpResponse(f"Prime between 0 and {n} are : {list}:")
         else :
             return HttpResponse("invalid")
     else :
         primei = primef()
-        return render(request, "app/test.html", {"primei"
+        return render(request, "app/test.html", {"primei": primei})
