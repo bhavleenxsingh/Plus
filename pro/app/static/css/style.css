@@ -1,0 +1,11 @@
+.container {
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Distribute items evenly */
+    text-align: center;
+}
+
+.spacer {
+    margin-top: 170px;
+    margin-bottom: 170px;
+    text-align: center;
+        } 
