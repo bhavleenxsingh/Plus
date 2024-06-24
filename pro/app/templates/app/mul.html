@@ -1,0 +1,23 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %}MULTIPLY{% endblock %}</title>
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+<h3>Enter 2 Numbers to find thier product :</h3>
+<h4>(Expression executed = First Number x Second Number)</h4><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ muli.as_p }} <br>
+            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+            <button type="submit" class="btn btn-outline-primary">Multiply</button>
+        </form>
+    </div>
+</div>
+<br><br>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+
+{% endblock %}

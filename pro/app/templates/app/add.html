@@ -1,0 +1,22 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %} ADD {% endblock %}</title>
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+        <h3>Enter 2 Numbers to find thier sum :</h3>
+        <h4>(Expression executed = First Number + Second Number)</h4><br>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ addi.as_p }} <br>
+                &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                <button type="submit" class="btn btn-outline-primary">Add</button>
+            </form>
+    </div>
+</div>
+<br><br>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+{% endblock %}
