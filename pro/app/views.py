@@ -109,6 +109,7 @@ def prime(request):
                         break
                 if r == 0:
                     t.append(i)
+                    primei.save()
             return render(request, "app/result.html", {'t':t})
         else :
             return HttpResponse("invalid")
