@@ -1,0 +1,22 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %}PRIME{% endblock %}</title>
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+<h3>Enter a Number to find the prime numbers between 1 and that number :</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ primei.as_p }} <br>
+            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+            <button type="submit" class="btn btn-outline-primary">Prime Numbers</button>
+        </form>
+    </div>
+</div>
+<br><br>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+
+{% endblock %}

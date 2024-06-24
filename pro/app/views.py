@@ -7,18 +7,18 @@ def home(request):
 
 def add(request):
     if request.method == 'POST':
-        fadd = addf(request.POST)
-        if fadd.is_valid():
-            fn = fadd.cleaned_data.get('FirstNumber')
-            sn = fadd.cleaned_data.get('SecondNumber')
+        addi = addf(request.POST)
+        if addi.is_valid():
+            fn = addi.cleaned_data.get('FirstNumber')
+            sn = addi.cleaned_data.get('SecondNumber')
             t = fn + sn
-            fadd.save()
-            return HttpResponse({t})
+            addi.save()
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
-        fadd = addf()
-        return render(request, 'app/test.html', {'fadd' : fadd} )
+        addi = addf()
+        return render(request, 'app/add.html', {'addi' : addi} )
     
 def sub(request):
     if request.method == 'POST':
@@ -28,12 +28,12 @@ def sub(request):
             sn = subi.cleaned_data.get('SecondNumber')
             t = fn - sn
             subi.save()
-            return HttpResponse({t})
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
         subi = subf()
-        return render(request, 'app/test.html', {'subi' : subi} )
+        return render(request, 'app/sub.html', {'subi' : subi} )
     
 def mul(request):
     if request.method == 'POST':
@@ -43,12 +43,12 @@ def mul(request):
             sn = muli.cleaned_data.get('SecondNumber')
             t = fn * sn
             muli.save()
-            return HttpResponse({t})
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
         muli = mulf()
-        return render(request, 'app/test.html', {'muli' : muli} )
+        return render(request, 'app/mul.html', {'muli' : muli} )
     
 def quo(request):
     if request.method == 'POST':
@@ -58,12 +58,12 @@ def quo(request):
             sn = quoi.cleaned_data.get('SecondNumber')
             t = fn // sn
             quoi.save()
-            return HttpResponse({t})
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
         quoi = quof()
-        return render(request, 'app/test.html', {'quoi' : quoi} )
+        return render(request, 'app/quo.html', {'quoi' : quoi} )
     
 def rem(request):
     if request.method == 'POST':
@@ -73,12 +73,12 @@ def rem(request):
             sn = remi.cleaned_data.get('SecondNumber')
             t = fn % sn
             remi.save()
-            return HttpResponse({t})
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
         remi = remf()
-        return render(request, 'app/test.html', {'remi' : remi} )
+        return render(request, 'app/rem.html', {'remi' : remi} )
     
 def exp(request):
     if request.method == 'POST':
@@ -88,15 +88,15 @@ def exp(request):
             sn = expi.cleaned_data.get('SecondNumber')
             t = fn ** sn
             expi.save()
-            return HttpResponse({t})
+            return render(request, "app/result.html", {'t':t})
         else:
             return HttpResponse("invalid")
     else:
         expi = expf()
-        return render(request, 'app/test.html', {'expi' : expi} )
+        return render(request, 'app/exp.html', {'expi' : expi} )
 
 def prime(request):
-    list = []
+    t = []
     if request.method == 'POST':
         primei = primef(request.POST)
         if primei.is_valid():
@@ -108,10 +108,10 @@ def prime(request):
                         r = 1
                         break
                 if r == 0:
-                    list.append(i)
-            return HttpResponse(f"Prime between 0 and {n} are : {list}:")
+                    t.append(i)
+            return render(request, "app/result.html", {'t':t})
         else :
             return HttpResponse("invalid")
     else :
         primei = primef()
-        return render(request, "app/test.html", {"primei": primei})
+        return render(request, "app/prime.html", {"primei": primei})

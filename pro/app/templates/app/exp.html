@@ -1,0 +1,23 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %}EXPONENT{% endblock %}</title>
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+<h3>Enter 2 Numbers to find the result where second number is the exponent of the first number</h3>
+<h4>(Expression executed = First Number  raised to power of (Second Number))</h4><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ expi.as_p }} <br>
+            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+            <button type="submit" class="btn btn-outline-primary">Exponent</button>
+        </form>
+    </div>
+</div>
+<br><br>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+
+{% endblock %}
