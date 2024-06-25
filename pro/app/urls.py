@@ -11,4 +11,5 @@ urlpatterns = [
     path('rem', views.rem, name = 'rem'),
     path('exp', views.exp, name = 'exp'),
     path('prime', views.prime, name = 'prime'),
+    path('otp', views.otp, name = 'otp'),
 ]

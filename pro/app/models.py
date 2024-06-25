@@ -56,3 +56,10 @@ class primem(models.Model):
     
     def __str__(self):
         return f'{self.Number} & {self.Time}'
+    
+class otpm(models.Model):
+    Number = models.IntegerField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
