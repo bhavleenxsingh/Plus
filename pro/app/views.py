@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
-from . forms import addf, subf, mulf, quof, remf, expf, primef
+from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf
 # Create your views here.
-
+import math, random
 def home(request):
     return render(request, 'app/home.html')
 
@@ -15,7 +15,7 @@ def add(request):
             addi.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         addi = addf()
         return render(request, 'app/add.html', {'addi' : addi} )
@@ -30,7 +30,7 @@ def sub(request):
             subi.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         subi = subf()
         return render(request, 'app/sub.html', {'subi' : subi} )
@@ -45,7 +45,7 @@ def mul(request):
             muli.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         muli = mulf()
         return render(request, 'app/mul.html', {'muli' : muli} )
@@ -60,7 +60,7 @@ def quo(request):
             quoi.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         quoi = quof()
         return render(request, 'app/quo.html', {'quoi' : quoi} )
@@ -75,7 +75,7 @@ def rem(request):
             remi.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         remi = remf()
         return render(request, 'app/rem.html', {'remi' : remi} )
@@ -90,7 +90,7 @@ def exp(request):
             expi.save()
             return render(request, "app/result.html", {'t':t})
         else:
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else:
         expi = expf()
         return render(request, 'app/exp.html', {'expi' : expi} )
@@ -112,7 +112,24 @@ def prime(request):
                     primei.save()
             return render(request, "app/result.html", {'t':t})
         else :
-            return HttpResponse("invalid")
+            return render(request, "app/invalid.html")
     else :
         primei = primef()
         return render(request, "app/prime.html", {"primei": primei})
+    
+def otp(request):
+    if request.method == "POST":
+        otpi = otpf(request.POST)
+        if otpi.is_valid():
+            otpi.save()
+            n = otpi.cleaned_data.get('Number')
+            num = "0123456789"
+            t = " "
+            for i in range(n):
+                t = t + num[math.floor(random.random() * 10)]
+            return render(request, "app/result.html", {'t': t.strip()})
+        else :
+            return render(request, "app/invalid.html")
+    else :
+        otpi = otpf()
+        return render(request, "app/otp.html", {'otpi': otpi})

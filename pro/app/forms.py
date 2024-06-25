@@ -1,5 +1,5 @@
 from django import forms
-from . models import addm, subm, mulm, quom, remm, expm, primem
+from . models import addm, subm, mulm, quom, remm, expm, primem, otpm
 
 class addf(forms.ModelForm):
     
@@ -41,4 +41,10 @@ class primef(forms.ModelForm):
     
     class Meta:
         model = primem
+        fields = ['Number']
+        
+class otpf(forms.ModelForm):
+    
+    class Meta:
+        model = otpm
         fields = ['Number']
