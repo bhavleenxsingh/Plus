@@ -63,3 +63,24 @@ class otpm(models.Model):
     
     def __str__(self):
         return f'{self.Number} & {self.Time}'
+    
+class fibm(models.Model):
+    Number = models.IntegerField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
+    
+class sqrtm(models.Model):
+    Number = models.IntegerField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
+    
+class cbrtm(models.Model):
+    Number = models.IntegerField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
