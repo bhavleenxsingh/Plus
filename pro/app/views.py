@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf
+from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf, fibf, sqrtf, cbrtf
 # Create your views here.
 import math, random
 def home(request):
@@ -49,36 +49,42 @@ def mul(request):
     else:
         muli = mulf()
         return render(request, 'app/mul.html', {'muli' : muli} )
-    
+  
 def quo(request):
-    if request.method == 'POST':
-        quoi = quof(request.POST)
-        if quoi.is_valid():
-            fn = quoi.cleaned_data.get('FirstNumber')
-            sn = quoi.cleaned_data.get('SecondNumber')
-            t = fn // sn
-            quoi.save()
-            return render(request, "app/result.html", {'t':t})
+    try :
+        if request.method == 'POST':
+            quoi = quof(request.POST)
+            if quoi.is_valid():
+                fn = quoi.cleaned_data.get('FirstNumber')
+                sn = quoi.cleaned_data.get('SecondNumber')
+                t = fn // sn
+                quoi.save()
+                return render(request, "app/result.html", {'t':t})
+            else:
+                return render(request, "app/invalid.html")
         else:
-            return render(request, "app/invalid.html")
-    else:
-        quoi = quof()
-        return render(request, 'app/quo.html', {'quoi' : quoi} )
+            quoi = quof()
+            return render(request, 'app/quo.html', {'quoi' : quoi} )
+    except :
+        return render(request, 'app/zde.html')
     
 def rem(request):
-    if request.method == 'POST':
-        remi = remf(request.POST)
-        if remi.is_valid():
-            fn = remi.cleaned_data.get('FirstNumber')
-            sn = remi.cleaned_data.get('SecondNumber')
-            t = fn % sn
-            remi.save()
-            return render(request, "app/result.html", {'t':t})
+    try :
+        if request.method == 'POST':
+            remi = remf(request.POST)
+            if remi.is_valid():
+                fn = remi.cleaned_data.get('FirstNumber')
+                sn = remi.cleaned_data.get('SecondNumber')
+                t = fn % sn
+                remi.save()
+                return render(request, "app/result.html", {'t':t})
+            else:
+                return render(request, "app/invalid.html")
         else:
-            return render(request, "app/invalid.html")
-    else:
-        remi = remf()
-        return render(request, 'app/rem.html', {'remi' : remi} )
+            remi = remf()
+            return render(request, 'app/rem.html', {'remi' : remi} )
+    except :
+        return render(request, 'app/zde.html')
     
 def exp(request):
     if request.method == 'POST':
@@ -133,3 +139,48 @@ def otp(request):
     else :
         otpi = otpf()
         return render(request, "app/otp.html", {'otpi': otpi})
+
+def fib(request):
+    if request.method == 'POST':
+        fibi = fibf(request.POST)
+        if fibi.is_valid():
+            fibi.save()
+            n = fibi.cleaned_data.get('Number')
+            a = 0
+            b = 1
+            t = []
+            while a < n:
+                t.append(a)
+                a, b = b, a + b
+            return render(request, 'app/result.html', {'t': t})
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        fibi = fibf()
+        return render(request, "app/fib.html", {'fibi': fibi})
+    
+def sqrt(request):
+    if request.method == 'POST':
+        sqrti = sqrtf(request.POST)
+        if sqrti.is_valid():
+            n = sqrti.cleaned_data.get('Number')
+            t = n ** (1/2)
+            return render(request, 'app/result.html', {'t': t})
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        sqrti = sqrtf()
+        return render(request, "app/sqrt.html", {'sqrti': sqrti})
+    
+def cbrt(request):
+    if request.method == 'POST':
+        cbrti = cbrtf(request.POST)
+        if cbrti.is_valid():
+            n = cbrti.cleaned_data.get('Number')
+            t = n ** (1/3)
+            return render(request, 'app/result.html', {'t': t})
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        cbrti = cbrtf()
+        return render(request, "app/cbrt.html", {'cbrti': cbrti})

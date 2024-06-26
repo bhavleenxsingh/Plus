@@ -12,4 +12,7 @@ urlpatterns = [
     path('exp', views.exp, name = 'exp'),
     path('prime', views.prime, name = 'prime'),
     path('otp', views.otp, name = 'otp'),
+    path('fib', views.fib, name = 'fib'),
+    path('sqrt', views.sqrt, name = 'sqrt'),
+    path('cbrt', views.cbrt, name = 'cbrt'),
 ]
