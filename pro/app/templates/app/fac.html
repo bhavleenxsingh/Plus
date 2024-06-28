@@ -1,0 +1,23 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %}FACTORIAL{% endblock %}</title>
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+<h3>Enter a Number to get factorial of that number :</h3>
+<h4>(For example : Entering 5 will give 120 (1 * 2 * 3 * 4 * 5))</h4><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ faci.as_p }} <br>
+            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+            <button type="submit" class="btn btn-outline-primary">Factorial</button>
+        </form>
+    </div>
+</div>
+<br><br>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+
+{% endblock %}

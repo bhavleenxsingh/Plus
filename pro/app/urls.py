@@ -15,4 +15,5 @@ urlpatterns = [
     path('fib', views.fib, name = 'fib'),
     path('sqrt', views.sqrt, name = 'sqrt'),
     path('cbrt', views.cbrt, name = 'cbrt'),
+    path('fac', views.fac, name = 'fac'),
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from . models import addm, subm, mulm, quom, remm, expm, primem, otpm, fibm, sqrtm, cbrtm
+from . models import addm, subm, mulm, quom, remm, expm, primem, otpm, fibm, sqrtm, cbrtm, facm
 
 class addf(forms.ModelForm):
     
@@ -66,3 +66,10 @@ class cbrtf(forms.ModelForm):
     class Meta:
         model = cbrtm
         fields = ['Number']
+        
+class facf(forms.ModelForm):
+    
+    class Meta:
+        model = facm
+        fields = ['Number']
+        
