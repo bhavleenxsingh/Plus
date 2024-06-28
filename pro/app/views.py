@@ -58,7 +58,7 @@ def quo(request):
             if quoi.is_valid():
                 fn = quoi.cleaned_data.get('FirstNumber')
                 sn = quoi.cleaned_data.get('SecondNumber')
-                t = fn // sn
+                t = fn / sn
                 quoi.save()
                 return render(request, "app/result.html", {'t':t})
             else:
@@ -108,16 +108,19 @@ def prime(request):
         primei = primef(request.POST)
         if primei.is_valid():
             n = primei.cleaned_data.get('Number')
-            for i in range(1, n):
-                r = 0
-                for j in range(2,i):
-                    if i % j == 0:
-                        r = 1
-                        break
-                if r == 0:
-                    t.append(i)
-                    primei.save()
-            return render(request, "app/result.html", {'t':t})
+            if n > 0 :
+                for i in range(1, n):
+                    r = 0
+                    for j in range(2,i):
+                        if i % j == 0:
+                            r = 1
+                            break
+                    if r == 0:
+                        t.append(i)
+                        primei.save()
+                return render(request, "app/result.html", {'t':t})
+            else :
+                return render(request, 'app/noneg.html')
         else :
             return render(request, "app/invalid.html")
     else :
@@ -132,9 +135,12 @@ def otp(request):
             n = otpi.cleaned_data.get('Number')
             num = "0123456789"
             t = " "
-            for i in range(n):
-                t = t + num[math.floor(random.random() * 10)]
-            return render(request, "app/result.html", {'t': t.strip()})
+            if n > 0 :
+                for i in range(n):
+                    t = t + num[math.floor(random.random() * 10)]
+                return render(request, "app/result.html", {'t': t.strip()})
+            else :
+                return render(request, 'app/noneg.html')
         else :
             return render(request, "app/invalid.html")
     else :
@@ -142,32 +148,41 @@ def otp(request):
         return render(request, "app/otp.html", {'otpi': otpi})
 
 def fib(request):
-    if request.method == 'POST':
-        fibi = fibf(request.POST)
-        if fibi.is_valid():
-            fibi.save()
-            n = fibi.cleaned_data.get('Number')
-            a = 0
-            b = 1
-            t = []
-            while a < n:
-                t.append(a)
-                a, b = b, a + b
-            return render(request, 'app/result.html', {'t': t})
+    try :
+        if request.method == 'POST':
+            fibi = fibf(request.POST)
+            if fibi.is_valid():
+                fibi.save()
+                n = fibi.cleaned_data.get('Number')
+                a = 0
+                b = 1
+                t = []
+                if n > 0:
+                    while a < n:
+                        t.append(a)
+                        a, b = b, a + b
+                    return render(request, 'app/result.html', {'t': t})
+                else :
+                    return render(request, 'app/noneg.html')
+            else :
+                return render(request, 'app/invalid.html')
         else :
-            return render(request, 'app/invalid.html')
-    else :
-        fibi = fibf()
-        return render(request, "app/fib.html", {'fibi': fibi})
-    
+            fibi = fibf()
+            return render(request, "app/fib.html", {'fibi': fibi})
+    except :
+        return render(request, 'app/noneg.html')
+        
 def sqrt(request):
     if request.method == 'POST':
         sqrti = sqrtf(request.POST)
         if sqrti.is_valid():
             sqrti.save()
             n = sqrti.cleaned_data.get('Number')
-            t = n ** (1/2)
-            return render(request, 'app/result.html', {'t': t})
+            if n > 0 :
+                t = n ** (1/2)
+                return render(request, 'app/result.html', {'t': t})
+            else :
+                return render(request, 'app/noneg.html')
         else :
             return render(request, 'app/invalid.html')
     else :
@@ -180,8 +195,11 @@ def cbrt(request):
         if cbrti.is_valid():
             cbrti.save()
             n = cbrti.cleaned_data.get('Number')
-            t = n ** (1/3)
-            return render(request, 'app/result.html', {'t': t})
+            if n > 0 :
+                t = n ** (1/3)
+                return render(request, 'app/result.html', {'t': t})
+            else :
+                return render(request, 'app/noneg.html')
         else :
             return render(request, 'app/invalid.html')
     else :
@@ -189,21 +207,24 @@ def cbrt(request):
         return render(request, "app/cbrt.html", {'cbrti': cbrti})
     
 def fac(request) :
-    if request.method == 'POST':
-        faci = facf(request.POST)
-        if faci.is_valid() :
-            faci.save()
-            n = faci.cleaned_data.get('Number')
-            def fcr(x):
-                if x == 0 or x == 1:
-                    return 1
-                else :
-                    x = x * fcr(x-1)
-                    return x
-            t = fcr(n)
-            return render(request, 'app/result.html', {'t': t})
+    try :
+        if request.method == 'POST':
+            faci = facf(request.POST)
+            if faci.is_valid() :
+                faci.save()
+                n = faci.cleaned_data.get('Number')
+                def fcr(x):
+                    if x == 0 or x == 1:
+                        return 1
+                    else :
+                        x = x * fcr(x-1)
+                        return x
+                t = fcr(n)
+                return render(request, 'app/result.html', {'t': t})
+            else :
+                return render(request, 'app/invalid.html')
         else :
-            return render(request, 'app/invalid.html')
-    else :
-        faci = facf()
-        return render(request, 'app/fac.html', {'faci': faci})
+            faci = facf()
+            return render(request, 'app/fac.html', {'faci': faci})
+    except :
+        return render(request, 'app/noneg.html')
