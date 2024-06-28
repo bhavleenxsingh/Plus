@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
-from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf, fibf, sqrtf, cbrtf
+from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf, fibf, sqrtf, cbrtf, facf
 # Create your views here.
 import math, random
+
 def home(request):
     return render(request, 'app/home.html')
 
@@ -163,6 +164,7 @@ def sqrt(request):
     if request.method == 'POST':
         sqrti = sqrtf(request.POST)
         if sqrti.is_valid():
+            sqrti.save()
             n = sqrti.cleaned_data.get('Number')
             t = n ** (1/2)
             return render(request, 'app/result.html', {'t': t})
@@ -176,6 +178,7 @@ def cbrt(request):
     if request.method == 'POST':
         cbrti = cbrtf(request.POST)
         if cbrti.is_valid():
+            cbrti.save()
             n = cbrti.cleaned_data.get('Number')
             t = n ** (1/3)
             return render(request, 'app/result.html', {'t': t})
@@ -184,3 +187,23 @@ def cbrt(request):
     else :
         cbrti = cbrtf()
         return render(request, "app/cbrt.html", {'cbrti': cbrti})
+    
+def fac(request) :
+    if request.method == 'POST':
+        faci = facf(request.POST)
+        if faci.is_valid() :
+            faci.save()
+            n = faci.cleaned_data.get('Number')
+            def fcr(x):
+                if x == 0 or x == 1:
+                    return 1
+                else :
+                    x = x * fcr(x-1)
+                    return x
+            t = fcr(n)
+            return render(request, 'app/result.html', {'t': t})
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        faci = facf()
+        return render(request, 'app/fac.html', {'faci': faci})
