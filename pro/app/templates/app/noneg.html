@@ -1,0 +1,18 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+<title>{% block title %}Negative Integer Error{% endblock %}</title>
+
+{% block content %}
+<div class = "container">
+    <div class = "spacer">
+        <h3>Input Given is Invalid.<br><br>
+            Enter a Positive Integer.<br><br>
+            Please Try Again.</h3> <br><br>
+    </div>
+</div>
+<div class = "container text-center">
+    <a href="{% url 'home' %}" ><button class="btn btn-outline-primary">Home</button></a>
+</div>
+
+{% endblock %}
