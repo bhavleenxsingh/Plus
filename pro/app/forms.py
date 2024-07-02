@@ -1,5 +1,5 @@
 from django import forms
-from . models import addm, subm, mulm, quom, remm, expm, primem, otpm, fibm, sqrtm, cbrtm, facm
+from . models import addm, subm, mulm, quom, remm, expm, primem, otpm, fibm, sqrtm, cbrtm, facm, milem, inchm
 
 class addf(forms.ModelForm):
     
@@ -73,3 +73,14 @@ class facf(forms.ModelForm):
         model = facm
         fields = ['Number']
         
+class milef(forms.ModelForm):
+    
+    class Meta:
+        model = milem
+        fields = ['Number']
+
+class inchf(forms.ModelForm):
+
+    class Meta:
+        model = inchm
+        fields = ['Number']

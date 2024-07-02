@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf, fibf, sqrtf, cbrtf, facf
+from . forms import addf, subf, mulf, quof, remf, expf, primef, otpf, fibf, sqrtf, cbrtf, facf, milef, inchf
 # Create your views here.
 import math, random
 
@@ -228,3 +228,39 @@ def fac(request) :
             return render(request, 'app/fac.html', {'faci': faci})
     except :
         return render(request, 'app/noneg.html')
+    
+def mile(request):
+    if request.method == 'POST':
+        milei = milef(request.POST)
+        if milei.is_valid():
+            a = milei.cleaned_data.get('Number')
+            if a > 0 :
+                milei.save()
+                t = a * 1.61
+                s = "Kilometers"
+                return render(request, 'app/result.html', {'t': t})
+            else :
+                return render(request, 'app/noneg.html')
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        milei = milef()
+        return render(request, 'app/mile.html', {'milei': milei})
+            
+def inch(request):
+    if request.method == 'POST':
+        inchi = inchf(request.POST)
+        if inchi.is_valid():
+            a = inchi.cleaned_data.get('Number')
+            if a > 0 :
+                inchi.save()
+                t = a * 2.54
+                s = "Centimeters"
+                return render(request, 'app/result.html', {'t': t})
+            else :
+                return render(request, 'app/noneg.html')
+        else :
+            return render(request, 'app/invalid.html')
+    else :
+        inchi = inchf()
+        return render(request, 'app/inch.html', {'inchi' : inchi})
