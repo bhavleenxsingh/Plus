@@ -92,3 +92,16 @@ class facm(models.Model):
     def __str__(self):
         return f'{self.Number} & {self.Time}'
 
+class milem(models.Model):
+    Number = models.FloatField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
+    
+class inchm(models.Model):
+    Number = models.FloatField()
+    Time = models.DateTimeField(default = datetime.now())
+    
+    def __str__(self):
+        return f'{self.Number} & {self.Time}'
