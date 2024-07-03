@@ -9,3 +9,18 @@
     margin-bottom: 170px;
     text-align: center;
         } 
+
+.child-element {
+    position: relative;
+    top : 0;
+    left : 50%;
+    background-color: darksalmon ;
+}
+
+.parent-element {
+    background-color: aquamarine;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
